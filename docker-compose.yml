@@ -1,0 +1,19 @@
+services:
+  rmq:
+    container_name: rabbit_mq # docker pull rabbitmq:3.13.7-management-alpine
+    image: rabbitmq:3.13.7-management-alpine
+    ports:
+      - "5672:5672" # AMQP protocol port
+      - "15672:15672" # Management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/mnesia
+      - rabbitmq_logs:/var/log/rabbitmq
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  rabbitmq_logs:
+    driver: local
